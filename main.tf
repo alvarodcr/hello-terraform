@@ -16,6 +16,8 @@ provider "aws" {
 resource "aws_instance" "app_server" {
   ami           = "ami-0b752bf1df193a6c4"
   instance_type = "t2.micro"
+  key_name	= "clave-lucatic.pem"
+  vpc_security_group_ids = "sg-013c0f1d5466fd440"
 
   tags = {
     Name = "hello-terraform"
