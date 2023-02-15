@@ -25,6 +25,6 @@ resource "aws_instance" "app_server" {
   }
   provisioner "local-exec" {
     working_dir = "ansible"
-    command     = "ansible-playbook -i aws_ec2.yml hello_2048.yml"
+    command     = "ansible-playbook -v -i aws_ec2.yml hello_2048.yml"
   }
 }
