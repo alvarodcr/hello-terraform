@@ -3,4 +3,4 @@ regions:
   - eu-west-1
 include_filters:
 - tag:APP:
-  - 'vue2048'
+  - 'vue'
