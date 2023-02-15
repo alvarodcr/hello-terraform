@@ -1,6 +1,6 @@
 ---
 - name: Install hello-2048
-  hosts: launched
+  hosts: all
   become: true
   gather_facts: true
   vars:
@@ -36,7 +36,7 @@
       command: mv /home/ec2-user/hello-2048-main/ /home/ec2-user/app/
    
     - name: Move /public_html to /var/www/
-      command: mv /home/ec2-user/app/hello-2048-main/public_html/ /var/www/html/
+      command: mv -r /home/ec2-user/app/hello-2048-main/public_html/* /var/www/html/
 
 
 
