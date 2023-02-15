@@ -13,7 +13,6 @@ provider "aws" {
   region = "eu-west-1"
 }
 
-
 resource "aws_instance" "app_server" {
   ami                    = "ami-0b752bf1df193a6c4"
   instance_type          = "t2.micro"
@@ -22,7 +21,12 @@ resource "aws_instance" "app_server" {
 
   tags = {
     Name = "hello-terraform"
-    APP  = "vue2048"
+    APP  = var.instance_app
   }
+}
+
+output "instance_public_ip" {
+  description = "Public IP address of the EC2 instance"
+  value       = aws_instance.app_server.public_ip
 }
 
