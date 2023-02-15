@@ -1,4 +1,4 @@
-terraform {
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -23,8 +23,33 @@ resource "aws_instance" "app_server" {
     Name = "hello-terraform"
     APP  = var.instance_app
   }
-  user_data = file("init.sh")
+  user_data = file("install_docker.sh")
 
+  provisioner "file" {
+    source      = "/home/sinensia/hello-terraform/init.sh"
+    destination = "/home/ec2-user/app"
+
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = file("~/.ssh/clave-lucatic.pem")
+      host        = aws_instance.app_server.public_ip
+
+    }
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /home/ec2-user/app/init.sh",
+      "/home/ec2-user/app/init.sh"
+    ]
+
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = file("~/.ssh/clave-lucatic.pem")
+      host        = "${aws_instance.example.public_ip}"
+    }
+  }
 
 
 }
