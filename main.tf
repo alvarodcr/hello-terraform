@@ -1,4 +1,4 @@
-
+terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -24,7 +24,6 @@ resource "aws_instance" "app_server" {
     APP  = var.instance_app
   }
   provisioner "local-exec" {
-    command = "ansible-playbook /home/sinensia/hello-ansible/aws_ec2.yml /home/sinensia/hello-ansible/hello_2048.yml"
+    command = "ansible-playbook -i aws_ec2.yml hello_2048.yml"
   }
-}
 }

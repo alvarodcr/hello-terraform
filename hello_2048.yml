@@ -1,0 +1,52 @@
+---
+- name: Install hello-2048
+  hosts: launched
+  become: true
+  gather_facts: true
+  vars:
+    ansible_user: ec2-user
+
+  tasks:
+    
+    - name: Install Apache HTTP Server
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Start Apache HTTP Server
+      service:
+        name: httpd
+        state: started
+
+    - name: Create directory /app
+      file:
+        path: /home/ec2-user/app
+        state: directory
+        owner: ec2-user
+        group: ec2-user
+        mode: 0755
+
+    - name: Clone the repository ZIP to /app
+      command: wget https://github.com/alvarodcr/hello-2048/archive/refs/heads/main.zip
+
+    - name: Unzip main.zip
+      command: unzip main.zip
+
+    - name: Move main.zip to /app
+      command: mv /home/ec2-user/hello-2048-main/ /home/ec2-user/app/
+   
+    - name: Move /public_html to /var/www/
+      command: mv /home/ec2-user/app/hello-2048-main/public_html/ /var/www/html/
+
+
+
+
+
+
+
+
+
+
+
+
+
