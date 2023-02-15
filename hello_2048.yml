@@ -36,7 +36,7 @@
       command: mv /home/ec2-user/hello-2048-main/ /home/ec2-user/app/
    
     - name: Move /public_html to /var/www/
-      command: mv -r /home/ec2-user/app/hello-2048-main/public_html/* /var/www/html/
+      command: sudo mv /home/ec2-user/app/hello-2048-main/public_html/* /var/www/html/
 
 
 
