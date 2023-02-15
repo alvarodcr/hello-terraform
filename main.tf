@@ -23,7 +23,7 @@ resource "aws_instance" "app_server" {
     Name = "hello-terraform"
     APP  = var.instance_app
   }
-  user_data = "${file("init.sh")}"
+  user_data = file("init.sh")
 
 
 
