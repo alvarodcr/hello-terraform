@@ -23,6 +23,8 @@ resource "aws_instance" "app_server" {
     Name = "hello-terraform"
     APP  = var.instance_app
   }
-  user_data = file("install_docker.sh")
-
+  provisioner "local-exec" {
+    command = "ansible-playbook /home/sinensia/hello-ansible/aws_ec2.yml /home/sinensia/hello-ansible/hello_2048.yml"
+  }
+}
 }
