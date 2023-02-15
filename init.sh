@@ -7,5 +7,5 @@ pip3 install docker-compose
 mkdir /home/ec2-user/app
 cd /home/ec2-user/app
 wget https://raw.githubusercontent.com/alvarodcr/hello-2048/main/docker-compose.yml
-wget https://raw.githubusercontent.com/alvarodcr/hello-2048/main/Dockerfile.yml
+docker pull ghcr.io/alvarodcr/hello-2048/hello2048:v1
 docker-compose up -d
