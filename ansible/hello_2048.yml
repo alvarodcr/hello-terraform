@@ -33,11 +33,11 @@
       command: unzip main.zip
 
     - name: Move main.zip to /app
+      command: mv v /home/ec2-user/main.zip /home/ec2-user/app/
       command: mv /home/ec2-user/hello-2048-main/ /home/ec2-user/app/
    
-    - name: Move /public_html to /var/www/ (mkdir /var/www/html if it doesnt exists)
-      command: sudo mkdir -p /var/www/html
-      command: sudo mv /home/ec2-user/app/hello-2048-main/public_html/* /var/www/html/
+    - name: Move /public_html to /var/www/
+      command: sudo cp -av /home/ec2-user/app/hello-2048-main/public_html/* /var/www/html/
 
 
 
