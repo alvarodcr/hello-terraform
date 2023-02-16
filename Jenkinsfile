@@ -31,8 +31,8 @@ pipeline {
                 git tag 1.0.${BUILD_NUMBER}
                 docker tag ${GIT_REPO_PKG}/${GHCR_PKG}:latest ${GIT_REPO_PKG}/${GHCR_PKG}:1.0.${BUILD_NUMBER}
                 '''
-		sshagent(['GITHUB']) {
-		    sh('git push ${GIT_REPO_SSH} --tags')
+		    sshagent(['GITHUB']) {
+		    sh('git push git@github.com:alvarodcr/hello-2048.git --tags')
                 }
 	    }	                              
         }  
@@ -60,7 +60,7 @@ pipeline {
             }
         }
 	    
-	stage('ANSIBLE --> SETTING AWS EC2 INSTANCE --> DEPLOYING <${GHCR_IMG}> CONTAINER') {
+	stage('ANSIBLE --> SETTING AWS EC2 INSTANCE --> DEPLOYING <${GHCR_PKG}> CONTAINER') {
             steps {
 		withAWS(credentials: '${AWS_ROOT_KEY}') {
 		    ansiblePlaybook credentialsId: '${AWS_KEY}', inventory: '${ANSIBLE_INV}', playbook: '${ANSIBLE_PB}'                         
