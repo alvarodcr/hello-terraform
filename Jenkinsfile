@@ -8,7 +8,7 @@ pipeline {
 	GIT_REPO_PKG = 'ghcr.io/alvarodcr/hello-terraform'		// GHCR_PKG package repository
 	GIT_REPO_SSH = 'git@github.com:alvarodcr/hello-terraform.git'	// GIT SSH repository
 	GIT_TOKEN = 'ghrc_token'					// ghcr.io credential (token) 
-	GITHUB_SSH = "GITHUB"						// GIT SSH credentials
+	GIT_SSH = "GIT"						// GIT SSH credentials
 	GIT_USER = 'alvarodcr'						// GIT username
 	GHCR_PKG = 'helloterraformpkg'					// PKG name that will be uploaded to ghcr.io
 	AWS_KEY = 'ssh-amazon'						// AWS credentials for connecting via SSH
@@ -31,9 +31,8 @@ pipeline {
                 git tag 1.0.${BUILD_NUMBER}
                 docker tag ${GIT_REPO_PKG}/${GHCR_PKG}:latest ${GIT_REPO_PKG}/${GHCR_PKG}:1.0.${BUILD_NUMBER}
                 '''
-		sshagent(['ssh-git']) {
-			sh 'git push --tags'
-                }
+		sh 'git push --tags'
+                
 	    }	                              
         }  
         
