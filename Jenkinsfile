@@ -3,6 +3,7 @@
 def GIT_IMG=ghcr.io/alvarodcr/hello-2048		#Repository path where the GHCR_IMG image will be uploaded
 def GIT_SSH=git@github.com:alvarodcr/hello-2048.git	#Git repository SSH
 def GIT_TOKEN=ghrc_token				#ghcr.io credential (token) 
+def GIT_SSH=GITHUB					#GIT SSH credentials
 def GHCR_IMG=hello2048					#Image name that will be uploaded to ghcr.io
 def DOCKER_USER=alvarodcr				#Git username
 def AWS_KEY=ssh-amazon					#AWS credentials for connecting via SSH
@@ -26,7 +27,7 @@ pipeline {
                 git tag 1.0.${BUILD_NUMBER}
                 docker tag $GIT_IMG/$GHCR_IMG$:latest $GIT_IMG/$GHCR_IMG:1.0.${BUILD_NUMBER}
                 '''
-                sshagent(['GITHUB']) {
+                sshagent(['$GIT_SSH']) {
                     sh('git push $GIT_SSH --tags')
                 }
 	    }	                              
@@ -41,10 +42,9 @@ pipeline {
             }
         }   
         
-        stage('TERRAFORM --> INIT & VALIDATE') {
+        stage('TERRAFORM --> INIT & FMT & VALIDATE') {
             steps {
-                sh 'terraform init'
-		sh 'terraform validate'
+                sh 'terraform init && terraform fmt && terraform validate'
             }
         }
          
