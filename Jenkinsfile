@@ -5,16 +5,16 @@ pipeline {
     
     environment {
 	
-	GIT_REPO_PKG = 'ghcr.io/alvarodcr/hello-2048'		// Repository where the GHCR_PKG image will be uploaded
-	GIT_REPO_SSH = 'git@github.com:alvarodcr/hello-2048.git'// GIT SSH repository
-	GIT_TOKEN = 'ghrc_token'				// ghcr.io credential (token) 
-	GIT_SSH = 'GITHUB'					// GIT SSH credentials
-	GIT_USER = 'alvarodcr'					// GIT username
-	GHCR_PKG = 'hello2048'					// Image name that will be uploaded to ghcr.io
-	AWS_KEY = 'ssh-amazon'					// AWS credentials for connecting via SSH
-	AWS_ROOT_KEY = '2934977b-3b53-4065-8b4a-312c2259a9f3'	// AWS credential associated with creating instances
-	ANSIBLE_INV = 'ansible/aws_ec2.yml' 			// Ansible inventory path
-	ANSIBLE_PB = 'ansible/hello_2048.yml' 			// Ansible playbook path
+	GIT_REPO_PKG = 'ghcr.io/alvarodcr/hello-terraform'		// Repository where the GHCR_PKG image will be uploaded
+	GIT_REPO_SSH = 'git@github.com:alvarodcr/hello-terraform.git'	// GIT SSH repository
+	GIT_TOKEN = 'ghrc_token'					// ghcr.io credential (token) 
+	GIT_SSH = 'GITHUB'						// GIT SSH credentials
+	GIT_USER = 'alvarodcr'						// GIT username
+	GHCR_PKG = 'helloterraformpkg'						// Image name that will be uploaded to ghcr.io
+	AWS_KEY = 'ssh-amazon'						// AWS credentials for connecting via SSH
+	AWS_ROOT_KEY = '2934977b-3b53-4065-8b4a-312c2259a9f3'		// AWS credential associated with creating instances
+	ANSIBLE_INV = 'ansible/aws_ec2.yml' 				// Ansible inventory path
+	ANSIBLE_PB = 'ansible/hello_2048.yml' 				// Ansible playbook path
     }
   
     options {
@@ -31,8 +31,8 @@ pipeline {
                 git tag 1.0.${BUILD_NUMBER}
                 docker tag ${GIT_REPO_PKG}/${GHCR_PKG}:latest ${GIT_REPO_PKG}/${GHCR_PKG}:1.0.${BUILD_NUMBER}
                 '''
-		sshagent(['GITHUB']) {
-		    sh('git push git@github.com:alvarodcr/hello-2048.git --tags')
+		sshagent([${GIT_SSH}]) {
+		    sh('git push ${GIT_REPO_SSH} --tags')
                 }
 	    }	                              
         }  
@@ -41,7 +41,7 @@ pipeline {
             steps{ 
 		withCredentials([string(credentialsId: '${GIT_TOKEN}')]) {
 		    sh 'echo ${GIT_TOKEN} | docker login ghcr.io -u ${GIT_USER} --password-stdin'
-		    sh 'docker push ${GIT_IMG}:1.0.${BUILD_NUMBER}'
+		    sh 'docker push ${GIT_REPO_PKG}:1.0.${BUILD_NUMBER}'
 		}
             }
         }   
