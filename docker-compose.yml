@@ -2,7 +2,7 @@ version: "3"
 services:
   httpd:
     build: .
-    image: ghcr.io/alvarodcr/hello-2048/hello2048:latest
+    image: ghcr.io/alvarodcr/hello-terraform/helloterraformpkg:latest
     ports:
       - "80:80"
 
