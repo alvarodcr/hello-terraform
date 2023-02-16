@@ -32,7 +32,7 @@ pipeline {
                 docker tag ${GIT_REPO_PKG}/${GHCR_PKG}:latest ${GIT_REPO_PKG}/${GHCR_PKG}:1.0.${BUILD_NUMBER}
                 '''
 		sshagent(['GITHUB']) {
-		    sh('git push ${GIT_REPO_SSH} --tags')
+		    sh 'git push ${GIT_REPO_SSH} --tags'
                 }
 	    }	                              
         }  
