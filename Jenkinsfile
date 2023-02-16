@@ -1,7 +1,5 @@
 // It would be recommendable to store all files into a single repository to ensure optimal functionality
 
-
-	
 pipeline {
     agent any
     
