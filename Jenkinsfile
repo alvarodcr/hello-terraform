@@ -1,4 +1,4 @@
-// It would be recommendable to store all files into a single repository to ensure optimal functionality
+//GITHUB-LOCAL-DOCKER-TERRAFORM-AWS-ANSIBLE
 
 pipeline {
     agent any
@@ -31,7 +31,7 @@ pipeline {
                 git tag 1.0.${BUILD_NUMBER}
                 docker tag ${GIT_REPO_PKG}/${GHCR_PKG}:latest ${GIT_REPO_PKG}/${GHCR_PKG}:1.0.${BUILD_NUMBER}
                 '''
-		sshagent(['${GIT_SSH}']) {
+		sshagent(['GITHUB']) {
 		    sh('git push ${GIT_REPO_SSH} --tags')
                 }
 	    }	                              
