@@ -3,7 +3,6 @@ pipeline {
     options {
         timestamps()
         ansiColor('xterm')
-    
     }
 	
     stages {
@@ -22,11 +21,11 @@ pipeline {
         }  
         
         stage('PUSING DOCKER IMAGE TO GHCR.IO'){
-            steps{ 
-		        withCredentials([string(credentialsId: 'ghrc_token', variable: 'GIT_TOKEN')]){
-		            sh 'echo $GIT_TOKEN | docker login ghcr.io -u alvarodcr --password-stdin'
-                    sh 'docker push ghcr.io/alvarodcr/hello-2048/hello2048:1.0.${BUILD_NUMBER}'
-		        }
+            steps{
+		withCredentials([string(credentialsId: 'ghrc_token', variable: 'GIT_TOKEN')]){
+			sh 'echo $GIT_TOKEN | docker login ghcr.io -u alvarodcr --password-stdin'
+	                sh 'docker push ghcr.io/alvarodcr/hello-2048/hello2048:1.0.${BUILD_NUMBER}'
+		}
             }
         }   
         
