@@ -35,8 +35,14 @@
         group: ec2-user
         mode: 0755
 
-    - name: Clone the repository ZIP to /app
-      command: wget https://raw.githubusercontent.com/alvarodcr/hello-2048/main/docker-compose.yml
+    - name: Install 2048
+      copy:
+        src: docker-compose.yml
+        dest: /home/ec2-user/app
+        owner: ec2-user
+        group: ec2-user
+        mode: "0644"
+        directory_mode: "0755"
 
     - name: Pull docker hello-2048 container
       command: docker-compose pull
