@@ -2,7 +2,7 @@
 - name: Install hello-2048
   hosts: all
   become: true
-  gather_facts: true
+  gather_facts: false
   vars:
     ansible_user: ec2-user
 
