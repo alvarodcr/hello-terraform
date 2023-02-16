@@ -7,7 +7,6 @@ pipeline {
     stages {
         stage('IMAGE'){
             steps{
-		dir('/home/sinensia/hello-2048'){
                 sh '''
                 docker-compose build
                 git tag 1.0.${BUILD_NUMBER}
