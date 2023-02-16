@@ -1,13 +1,7 @@
 pipeline {
   agent any
-  environment {
-    TF_PLUGIN_CACHE_DIR = "${HOME}/.terraform.d/plugin-cache"
-  }
-
+  options {timestamps()}
   stages {
-
-    stage('AWS EC2 instance - Terraform --> Aplicando main.tf') {
-        steps {  sshagent(['GITHUB']) {}
 
 
     stage('AWS EC2 instance - Terraform --> Validando main.tf') {
