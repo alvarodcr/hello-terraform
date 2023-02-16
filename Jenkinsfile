@@ -6,7 +6,7 @@ pipeline {
     }
 	
     stages {
-        stage('BUILDING IMAGE'){
+        stage('DOCKER --> BUILDING IMAGE'){
             steps{
 		sh '''
 		docker-compose build
@@ -19,7 +19,7 @@ pipeline {
 	    }	                              
         }  
         
-        stage('PUSING DOCKER IMAGE TO GHCR.IO'){
+        stage('DOCKER --> LOGIN & PUSHING TO GHCR.IO'){
             steps{ 
 		withCredentials([string(credentialsId: 'ghrc_token', variable: 'GIT_TOKEN')]){
 		    sh 'echo $GIT_TOKEN | docker login ghcr.io -u alvarodcr --password-stdin'
@@ -28,26 +28,25 @@ pipeline {
             }
         }   
         
-        stage('VALiDATING TERRAFORM --> MAIN.CFG') {
+        stage('TERRAFORM --> INIT & VALIDATE') {
             steps {
-                sh 'terraform validate'
-            
+                sh 'terraform init'
+		sh 'terraform validate'
             }
         }
          
-        stage('TERRAFORM --> BUILDING INSTANCE AWS EC2 INSTANCE') {
+        stage('TERRAFORM --> BUILDING AWS EC2 INSTANCE') {
             steps {
             	withAWS(credentials: '2934977b-3b53-4065-8b4a-312c2259a9f3') {
-                    sh 'terraform apply -auto-approve -lock=false'
-                                        
+                    sh 'terraform apply -auto-approve -lock=false'                         
                 }
             }
         }
-    	stage('ANSIBLE --> SETTING AWS EC2 INSTANCE') {
+	    
+    	stage('ANSIBLE --> SETTING AWS EC2 INSTANCE --> DEPLoYING <HELLO-2048> CONTAINER') {
             steps {
             	withAWS(credentials: '2934977b-3b53-4065-8b4a-312c2259a9f3') {
-                    ansiblePlaybook credentialsId: 'ssh-amazon', inventory: 'ansible/aws_ec2.yml', playbook: 'ansible/hello_2048.yml'
-                                        
+                    ansiblePlaybook credentialsId: 'ssh-amazon', inventory: 'ansible/aws_ec2.yml', playbook: 'ansible/hello_2048.yml'                         
                 }
             }
         }
