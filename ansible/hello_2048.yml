@@ -14,18 +14,23 @@
         timeout: 300
     
     - name: Install Docker
-      command: amazon-linux-extras install -y docker
-
-    - name: Start Docker Service
-      service:
+      amazon_linux_extras:
         name: docker
-        state: started
+        state: present
+
+    - name: Add user to Docker Group
+      user:
+        name: ec2-user
+        groups: docker
+        append: yes
     
     - name: Add user to Docker Group
       command: usermod -a -G docker ec2-user
     
-    - name: Install docker-compose
-      command: pip3 install docker-compose
+    - name: Install Docker Compose
+      pip:
+        name: docker-compose
+        state: latest
 
     - name: Create directory /app
       file:
@@ -44,8 +49,10 @@
         mode: "0644"
         directory_mode: "0755"
 
-    - name: Pull docker hello-2048 container
-      command: docker-compose pull
-
-    - name: Deploy docker hello-2048 container
-      command: docker-compose up -d
+    - name: Pull and deploy hello-2048 container
+      docker_compose:
+        project_src: /home/ec2-user/app/docker-compose.yml
+        project_name: hello-2048
+        pull: yes
+        detached: yes
+        state: started
