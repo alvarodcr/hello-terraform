@@ -1,18 +1,24 @@
 // It would be recommendable to store all files into a single repository to ensure optimal functionality
 
-def GIT_REPO_IMG = 'ghcr.io/alvarodcr/hello-2048'		// Repository path where the GHCR_IMG image will be uploaded
-def GIT_REPO_SSH = 'git@github.com:alvarodcr/hello-2048.git'	// Git SSH repository
-def GIT_TOKEN = 'ghrc_token'					// ghcr.io credential (token) 
-def GIT_SSH = 'GITHUB'						// GIT SSH credentials
-def GIT_USER = 'alvarodcr'					// Git username
-def GHCR_IMG = 'hello2048'					// Image name that will be uploaded to ghcr.io
-def AWS_KEY = 'ssh-amazon'					// AWS credentials for connecting via SSH
-def AWS_ROOT_KEY = '2934977b-3b53-4065-8b4a-312c2259a9f3'	// AWS credential associated with creating instances
-def ANSIBLE_INV = 'ansible/aws_ec2.yml' 			// Ansible inventory path
-def ANSIBLE_PB = 'ansible/hello_2048.yml' 			// Ansible playbook path
+
 	
 pipeline {
     agent any
+    
+    environment {
+	
+	GIT_REPO_IMG = 'ghcr.io/alvarodcr/hello-2048'		// Repository path where the GHCR_IMG image will be uploaded
+	GIT_REPO_SSH = 'git@github.com:alvarodcr/hello-2048.git'// Git SSH repository
+	GIT_TOKEN = 'ghrc_token'				// ghcr.io credential (token) 
+	GIT_SSH = 'GITHUB'					// GIT SSH credentials
+	GIT_USER = 'alvarodcr'					// Git username
+	GHCR_IMG = 'hello2048'					// Image name that will be uploaded to ghcr.io
+	AWS_KEY = 'ssh-amazon'					// AWS credentials for connecting via SSH
+	AWS_ROOT_KEY = '2934977b-3b53-4065-8b4a-312c2259a9f3'	// AWS credential associated with creating instances
+	ANSIBLE_INV = 'ansible/aws_ec2.yml' 			// Ansible inventory path
+	ANSIBLE_PB = 'ansible/hello_2048.yml' 			// Ansible playbook path
+    }
+  
     options {
         timestamps()
         ansiColor('xterm')
