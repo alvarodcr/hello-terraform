@@ -6,7 +6,7 @@ pipeline {
 
     stage('AWS EC2 instance - Terraform --> Validando main.tf') {
         steps {
-                sh 'terraform apply'
+                sh 'terraform validate'
             
         }
     }
