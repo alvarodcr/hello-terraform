@@ -30,7 +30,8 @@ pipeline {
         
         stage('VALiDATING TERRAFORM --> MAIN.CFG') {
             steps {
-                sh 'terraform validate'
+                sh 'terraform init'
+		sh 'terraform validate'
             
             }
         }
