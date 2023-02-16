@@ -1,4 +1,4 @@
-// It would be recommendable to store all files into a single repository to ensure optimal performance
+// It would be recommendable to store all files into a single repository to ensure optimal functionality
 
 def GIT_IMG = ghcr.io/alvarodcr/hello-2048		// Repository path where the GHCR_IMG image will be uploaded
 def GIT_SSH = git@github.com:alvarodcr/hello-2048.git	// Git SSH repository
