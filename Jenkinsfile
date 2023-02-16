@@ -29,19 +29,19 @@ pipeline {
 		sh '''
 		docker-compose build
                 git tag 1.0.${BUILD_NUMBER}
-                docker tag $GIT_REPO_IMG/$GHCR_IMG$:latest $GIT_REPO_IMG/$GHCR_IMG:1.0.${BUILD_NUMBER}
+                docker tag ${GIT_REPO_IMG}/${GHCR_IMG}:latest {$GIT_REPO_IMG}/${GHCR_IMG}:1.0.${BUILD_NUMBER}
                 '''
                 sshagent(['$GIT_SSH']) {
-                    sh('git push $GIT_REPO_SSH --tags')
+		    sh('git push ${GIT_REPO_SSH} --tags')
                 }
 	    }	                              
         }  
         
         stage('DOCKER --> LOGIN & PUSHING TO GHCR.IO') {
             steps{ 
-		withCredentials([string(credentialsId: '$GIT_TOKEN')]) {
-		    sh 'echo $GIT_TOKEN | docker login ghcr.io -u $GIT_USER --password-stdin'
-                    sh 'docker push $GIT_IMG:1.0.${BUILD_NUMBER}'
+		withCredentials([string(credentialsId: '${GIT_TOKEN}')]) {
+		    sh 'echo ${GIT_TOKEN} | docker login ghcr.io -u ${GIT_USER} --password-stdin'
+		    sh 'docker push ${GIT_IMG}:1.0.${BUILD_NUMBER}'
 		}
             }
         }   
@@ -54,16 +54,16 @@ pipeline {
          
         stage('TERRAFORM --> BUILDING AWS EC2 INSTANCE') {
             steps {
-            	withAWS(credentials: '$AWS_ROOT_KEY') {
+		withAWS(credentials: '${AWS_ROOT_KEY}') {
                     sh 'terraform apply -auto-approve -lock=false'                         
                 }
             }
         }
 	    
-    	stage('ANSIBLE --> SETTING AWS EC2 INSTANCE --> DEPLOYING <$GHCR_IMG> CONTAINER') {
+	stage('ANSIBLE --> SETTING AWS EC2 INSTANCE --> DEPLOYING <${GHCR_IMG}> CONTAINER') {
             steps {
-            	withAWS(credentials: '$AWS_ROOT_KEY') {
-                    ansiblePlaybook credentialsId: '$AWS_KEY', inventory: '$ANSIBLE_INV', playbook: '$ANSIBLE_PB'                         
+		withAWS(credentials: '${AWS_ROOT_KEY}') {
+		    ansiblePlaybook credentialsId: '${AWS_KEY}', inventory: '${ANSIBLE_INV}', playbook: '${ANSIBLE_PB}'                         
                 }
             }
         }
