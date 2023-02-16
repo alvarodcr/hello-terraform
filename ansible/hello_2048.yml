@@ -36,7 +36,7 @@
         mode: 0755
 
     - name: Clone the repository ZIP to /app
-      command: wget https://github.com/alvarodcr/hello-2048/main/docker-compose.yml
+      command: wget https://raw.githubusercontent.com/alvarodcr/hello-2048/main/docker-compose.yml
 
     - name: Pull docker hello-2048 container
       command: docker-compose pull
