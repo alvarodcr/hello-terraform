@@ -15,11 +15,9 @@ pipeline {
 
     stage('AWS EC2 instance - Terraform --> Aplicando main.tf') {
       steps {
-        withCredentials([sshUserPrivateKey(credentialsId:'ssh-amazon', keyFileVariable: 'AWS_SSH_KEY')]) {
 	  withAWS(credentials: '2934977b-3b53-4065-8b4a-312c2259a9f3') {
                sh 'cd /home/sinensia/hello-terraform && terraform apply -auto-approve -lock=false'
           }
-        }
       }
     }
   }
