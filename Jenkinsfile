@@ -5,12 +5,12 @@ pipeline {
     
     environment {
 	
-	GIT_REPO_IMG = 'ghcr.io/alvarodcr/hello-2048'		// Repository path where the GHCR_IMG image will be uploaded
-	GIT_REPO_SSH = 'git@github.com:alvarodcr/hello-2048.git'// Git SSH repository
+	GIT_REPO_PKG = 'ghcr.io/alvarodcr/hello-2048'		// Repository where the GHCR_PKG image will be uploaded
+	GIT_REPO_SSH = 'git@github.com:alvarodcr/hello-2048.git'// GIT SSH repository
 	GIT_TOKEN = 'ghrc_token'				// ghcr.io credential (token) 
 	GIT_SSH = 'GITHUB'					// GIT SSH credentials
-	GIT_USER = 'alvarodcr'					// Git username
-	GHCR_IMG = 'hello2048'					// Image name that will be uploaded to ghcr.io
+	GIT_USER = 'alvarodcr'					// GIT username
+	GHCR_PKG = 'hello2048'					// Image name that will be uploaded to ghcr.io
 	AWS_KEY = 'ssh-amazon'					// AWS credentials for connecting via SSH
 	AWS_ROOT_KEY = '2934977b-3b53-4065-8b4a-312c2259a9f3'	// AWS credential associated with creating instances
 	ANSIBLE_INV = 'ansible/aws_ec2.yml' 			// Ansible inventory path
@@ -29,7 +29,7 @@ pipeline {
 		sh '''
 		docker-compose build
                 git tag 1.0.${BUILD_NUMBER}
-                docker tag ${GIT_REPO_IMG}/${GHCR_IMG}:latest ${GIT_REPO_IMG}/${GHCR_IMG}:1.0.${BUILD_NUMBER}
+                docker tag ${GIT_REPO_PKG}/${GHCR_PKG}:latest ${GIT_REPO_PKG}/${GHCR_PKG}:1.0.${BUILD_NUMBER}
                 '''
 		sshagent(['${GIT_SSH}']) {
 		    sh('git push ${GIT_REPO_SSH} --tags')
