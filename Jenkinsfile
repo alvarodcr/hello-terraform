@@ -6,7 +6,7 @@ pipeline {
     }
 	
     stages {
-        stage('DOCKER --> BUILDING IMAGE'){
+        stage('DOCKER --> BUILDING IMAGE') {
             steps{
 		sh '''
 		docker-compose build
@@ -19,9 +19,9 @@ pipeline {
 	    }	                              
         }  
         
-        stage('DOCKER --> LOGIN & PUSHING TO GHCR.IO'){
+        stage('DOCKER --> LOGIN & PUSHING TO GHCR.IO') {
             steps{ 
-		withCredentials([string(credentialsId: 'ghrc_token', variable: 'GIT_TOKEN')]){
+		withCredentials([string(credentialsId: 'ghrc_token', variable: 'GIT_TOKEN')]) {
 		    sh 'echo $GIT_TOKEN | docker login ghcr.io -u alvarodcr --password-stdin'
                     sh 'docker push ghcr.io/alvarodcr/hello-2048/hello2048:1.0.${BUILD_NUMBER}'
 		}
