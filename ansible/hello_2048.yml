@@ -35,9 +35,9 @@
         group: ec2-user
         mode: 0755
 
-    - name: Install 2048
+    - name: Copy docker-compose.yml to ~/app on AWS EC2
       copy:
-        src: docker-compose.yml
+        src: /home/sinensia/hello-terraform/docker-compose.yml
         dest: /home/ec2-user/app
         owner: ec2-user
         group: ec2-user
