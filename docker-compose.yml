@@ -2,7 +2,7 @@ version: "3"
 services:
   httpd:
     build: .
-    image: ghcr.io/alvarodcr/hello-2048/hello2048:v1
+    image: ghcr.io/alvarodcr/hello-2048/hello2048:latest
     ports:
       - "80:80"
 
