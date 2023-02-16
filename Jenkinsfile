@@ -31,7 +31,7 @@ pipeline {
                 git tag 1.0.${BUILD_NUMBER}
                 docker tag ${GIT_REPO_PKG}/${GHCR_PKG}:latest ${GIT_REPO_PKG}/${GHCR_PKG}:1.0.${BUILD_NUMBER}
                 '''
-		    sshagent(['GITHUB']) {
+		sshagent(['GITHUB']) {
 		    sh('git push git@github.com:alvarodcr/hello-2048.git --tags')
                 }
 	    }	                              
