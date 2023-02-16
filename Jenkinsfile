@@ -41,8 +41,8 @@ pipeline {
                     sh 'cd /home/sinensia/hello-terraform && terraform apply -auto-approve -lock=false'
                     ansiblePlaybook (
                         credentialsId: '2934977b-3b53-4065-8b4a-312c2259a9f3', 
-                        inventory: '/home/sinensia/aws_ec2.yml', 
-                        playbook: '/home/sinensia/hello_2048.yml'
+                        inventory: '/home/sinensia/hello-terraform/ansible/aws_ec2.yml', 
+                        playbook: '/home/sinensia/hello-terraform/ansible/hello_2048.yml'
                     )                    
                 }
             }
