@@ -7,7 +7,7 @@ pipeline {
 	
 	GIT_REPO_PKG = 'ghcr.io/alvarodcr/hello-terraform'		// GHCR_PKG package repository
 	GIT_REPO_SSH = 'git@github.com:alvarodcr/hello-terraform.git'	// GIT SSH repository
-	GIT_TOKEN = 'ghrc_token'					// ghcr.io credential (token) 
+	J_GIT_TOKEN = 'ghrc_token'					// ghcr.io credential (token) 
 	GIT_SSH_CN = "GIT"						// GIT SSH credentials
 	GIT_USER = 'alvarodcr'						// GIT username
 	GHCR_PKG = 'helloterraformpkg'					// PKG name that will be uploaded to ghcr.io
@@ -39,8 +39,8 @@ pipeline {
         
         stage('DOCKER --> LOGIN & PUSHING TO GHCR.IO') {
             steps{ 
-		withCredentials([string(credentialsId: '${GIT_TOKEN}')]) {
-		    sh 'echo ${GIT_TOKEN} | docker login ghcr.io -u ${GIT_USER} --password-stdin'
+		withCredentials([string(credentialsId: '${J_GIT_TOKEN}', variable: 'TOKEN_GIT')]) {
+		    sh 'echo $TOKEN_GIT | docker login ghcr.io -u ${GIT_USER} --password-stdin'
 		    sh 'docker push ${GIT_REPO_PKG}:1.0.${BUILD_NUMBER}'
 		}
             }
