@@ -1,6 +1,9 @@
 pipeline {
   agent any
-  options {timestamps()}
+  options {
+    timestamps()
+    ansiColor('xterm')
+  }
   stages {
 
     stage('AWS EC2 instance - Terraform --> Validando main.tf') {
