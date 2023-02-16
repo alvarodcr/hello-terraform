@@ -1,12 +1,14 @@
-def GIT_IMG=ghcr.io/alvarodcr/hello-2048		#Ruta del repositorio donde se subira la imagen de GHCR_IMG
-def GIT_SSH=git@github.com:alvarodcr/hello-2048.git	#Ruta SSH del repositorio de GIT
-def GIT_TOKEN=ghrc_token				#Credencial para loguearse en ghcr.io
-def GHCR_IMG=hello2048					#Nombre de la imagen que se subira a ghcr.io
-def DOCKER_USER=alvarodcr				#Nombre del usuario de GIT
-def AWS_KEY=ssh-amazon					#Credencial para conectarse por SSH a las isntancias de AWS
-def AWS_ROOT_KEY=2934977b-3b53-4065-8b4a-312c2259a9f3	#Credencial asociada a la creacion de instancias en AWS
-def ANSIBLE_INV=ansible/aws_ec2.yml 			#Ruta del inventario de Ansible
-def ANSIBLE_PB=ansible/hello_2048.yml 			#Ruta del playbook de Ansible
+#It would be recommendable to store all files into a single repository to ensure optimal functionality
+
+def GIT_IMG=ghcr.io/alvarodcr/hello-2048		#Repository path where the GHCR_IMG image will be uploaded
+def GIT_SSH=git@github.com:alvarodcr/hello-2048.git	#Git repository SSH
+def GIT_TOKEN=ghrc_token				#Credential for logging into ghcr.io
+def GHCR_IMG=hello2048					#Name of the image that will be uploaded to ghcr.io
+def DOCKER_USER=alvarodcr				#Git username
+def AWS_KEY=ssh-amazon					#Credential for connecting to AWS instances via SSH
+def AWS_ROOT_KEY=2934977b-3b53-4065-8b4a-312c2259a9f3	#Credential associated with creating instances in AWS
+def ANSIBLE_INV=ansible/aws_ec2.yml 			#Path of the Ansible inventory
+def ANSIBLE_PB=ansible/hello_2048.yml 			#Path of the Ansible playbook
 	
 pipeline {
     agent any
