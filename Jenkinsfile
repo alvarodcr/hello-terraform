@@ -29,7 +29,7 @@ pipeline {
 		sh '''
 		docker-compose build
                 git tag 1.0.${BUILD_NUMBER}
-                docker tag ${GIT_REPO_IMG}/${GHCR_IMG}:latest {$GIT_REPO_IMG}/${GHCR_IMG}:1.0.${BUILD_NUMBER}
+                docker tag ${GIT_REPO_IMG}/${GHCR_IMG}:latest ${GIT_REPO_IMG}/${GHCR_IMG}:1.0.${BUILD_NUMBER}
                 '''
                 sshagent(['$GIT_SSH']) {
 		    sh('git push ${GIT_REPO_SSH} --tags')
