@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('BUILDING IMAGE'){
             steps{
-                dir('/home/sinensia/hello-2048')
+                dir('/home/sinensia/hello-2048'){
 		sh '''
 		docker-compose build
                 git tag 1.0.${BUILD_NUMBER}
@@ -16,7 +16,8 @@ pipeline {
                 '''
                 sshagent(['GITHUB']) {
                     sh('git push git@github.com:alvarodcr/hello-2048.git --tags')
-                }               
+                }
+	      }               
             }      
         }  
         
