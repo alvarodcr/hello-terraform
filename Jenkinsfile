@@ -1,7 +1,7 @@
 // It would be recommendable to store all files into a single repository to ensure optimal functionality
 
-def GIT_IMG = 'ghcr.io/alvarodcr/hello-2048'			// Repository path where the GHCR_IMG image will be uploaded
-def GIT_SSH = 'git@github.com:alvarodcr/hello-2048.git'		// Git SSH repository
+def GIT_REPO_IMG = 'ghcr.io/alvarodcr/hello-2048'			// Repository path where the GHCR_IMG image will be uploaded
+def GIT_REPO_SSH = 'git@github.com:alvarodcr/hello-2048.git'		// Git SSH repository
 def GIT_TOKEN = 'ghrc_token'					// ghcr.io credential (token) 
 def GIT_SSH = 'GITHUB'						// GIT SSH credentials
 def GIT_USER = 'alvarodcr'					// Git username
@@ -25,10 +25,10 @@ pipeline {
 		sh '''
 		docker-compose build
                 git tag 1.0.${BUILD_NUMBER}
-                docker tag $GIT_IMG/$GHCR_IMG$:latest $GIT_IMG/$GHCR_IMG:1.0.${BUILD_NUMBER}
+                docker tag $GIT_REPO_IMG/$GHCR_IMG$:latest $GIT_REPO_IMG/$GHCR_IMG:1.0.${BUILD_NUMBER}
                 '''
                 sshagent(['$GIT_SSH']) {
-                    sh('git push $GIT_SSH --tags')
+                    sh('git push $GIT_REPO_SSH --tags')
                 }
 	    }	                              
         }  
