@@ -2,26 +2,30 @@
 - name: Install hello-2048
   hosts: all
   become: true
-  gather_facts: false
+  gather_facts: true
   vars:
     ansible_user: ec2-user
 
   tasks:
     - name: Wait for SSH to come up
-      wait_for_conecction:
+      wait_for_connection:
         delay: 10
         sleep: 5
         timeout: 300
+    
+    - name: Install Docker
+      command: amazon-linux-extras install -y docker
 
-    - name: Install Apache HTTP Server
-      yum:
-        name: httpd
-        state: latest
-
-    - name: Start Apache HTTP Server
+    - name: Start Docker Service
       service:
-        name: httpd
+        name: docker
         state: started
+    
+    - name: Add user to Docker Group
+      command: usermod -a -G docker ec2-user
+    
+    - name: Install docker-compose
+      command: pip3 install docker-compose
 
     - name: Create directory /app
       file:
@@ -32,27 +36,11 @@
         mode: 0755
 
     - name: Clone the repository ZIP to /app
-      command: wget https://github.com/alvarodcr/hello-2048/archive/refs/heads/main.zip
+      working_dir: /home/ec2-user/app
+      command: wget https://github.com/alvarodcr/hello-2048/main/docker-compose.yml
 
-    - name: Unzip main.zip
-      command: unzip main.zip
+    - name: Pull docker hello-2048 container
+      command: docker-compose pull
 
-    - name: Move main.zip to /app
-      command: mv v /home/ec2-user/main.zip /home/ec2-user/app/
-      command: mv /home/ec2-user/hello-2048-main/ /home/ec2-user/app/
-   
-    - name: Move /public_html to /var/www/
-      command: sudo cp -av /home/ec2-user/app/hello-2048-main/public_html/* /var/www/html/
-
-
-
-
-
-
-
-
-
-
-
-
-
+    - name: Deploy docker hello-2048 container
+      command: docker-compose up -d
