@@ -12,7 +12,7 @@ pipeline {
                 cd /home/sinensia/hello-2048
                 git config --global --add safe.directory /home/sinensia/hello-2048
 		docker-compose build
-                sudo --ask-become-pass git tag 1.0.${BUILD_NUMBER}
+                sudo -A git tag 1.0.${BUILD_NUMBER}
                 docker tag ghcr.io/alvarodcr/hello-2048/hello2048:v1 ghcr.io/alvarodcr/hello-2048/hello2048:1.0.${BUILD_NUMBER}
                 '''
                 sshagent(['GITHUB']) {
