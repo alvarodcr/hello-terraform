@@ -37,7 +37,7 @@ pipeline {
          
         stage('TERRAFORM --> BUILDING AWS EC2 INSTANCE') {
             steps {
-            	withAWS(credentials: '2934977b-3b53-4065-8b4a-312c2259a9f3') {
+            	withAWS(credentials: 'ssh-amazon') {
                     sh 'terraform apply -auto-approve -lock=false'                         
                 }
             }
@@ -45,7 +45,7 @@ pipeline {
 	    
     	stage('ANSIBLE --> SETTING AWS EC2 INSTANCE --> DEPLoYING <HELLO-2048> CONTAINER') {
             steps {
-            	withAWS(credentials: '2934977b-3b53-4065-8b4a-312c2259a9f3') {
+            	withAWS(credentials: 'ssh-amazon') {
                     ansiblePlaybook credentialsId: 'ssh-amazon', inventory: 'ansible/aws_ec2.yml', playbook: 'ansible/hello_2048.yml'                         
                 }
             }
