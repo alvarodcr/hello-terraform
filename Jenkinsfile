@@ -1,7 +1,7 @@
 // It would be recommendable to store all files into a single repository to ensure optimal functionality
 
-def GIT_REPO_IMG = 'ghcr.io/alvarodcr/hello-2048'			// Repository path where the GHCR_IMG image will be uploaded
-def GIT_REPO_SSH = 'git@github.com:alvarodcr/hello-2048.git'		// Git SSH repository
+def GIT_REPO_IMG = 'ghcr.io/alvarodcr/hello-2048'		// Repository path where the GHCR_IMG image will be uploaded
+def GIT_REPO_SSH = 'git@github.com:alvarodcr/hello-2048.git'	// Git SSH repository
 def GIT_TOKEN = 'ghrc_token'					// ghcr.io credential (token) 
 def GIT_SSH = 'GITHUB'						// GIT SSH credentials
 def GIT_USER = 'alvarodcr'					// Git username
