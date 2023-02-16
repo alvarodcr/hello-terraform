@@ -50,11 +50,8 @@ pipeline {
     	stage('ANSIBLE --> SETTING AWS EC2 INSTANCE') {
             steps {
             	withAWS(credentials: '2934977b-3b53-4065-8b4a-312c2259a9f3') {
-                    ansiblePlaybook (
-                        credentialsId: 'ssh-amazon', 
-                        inventory: '/home/sinensia/hello-terraform/ansible/aws_ec2.yml', 
-                        playbook: '/home/sinensia/hello-terraform/ansible/hello_2048.yml'
-                    )                    
+                    ansiblePlaybook credentialsId: 'ssh-amazon', inventory: 'aws_ec2.yml', playbook: 'hello_2048.yml'
+                                        
                 }
             }
         }
