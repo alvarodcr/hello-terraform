@@ -1,10 +1,10 @@
-def GIT_IMG=ghcr.io/alvarodcr/hello-2048/		#Ruta del repositorio donde se subira la imagen de GHCR_IMG
+def GIT_IMG=ghcr.io/alvarodcr/hello-2048		#Ruta del repositorio donde se subira la imagen de GHCR_IMG
 def GIT_SSH=git@github.com:alvarodcr/hello-2048.git	#Ruta SSH del repositorio de GIT
 def GHCR_IMG=hello2048					#Nombre de la imagen de ghcr.io
 def DOCKER_USER=alvarodcr				#Nombre del usuario de GIT
 def TOKEN_GIT=ghrc_token				#Credencial para loguearse en ghcr.io
 def AWS_KEY=ssh-amazon					#Credencial para conectarse por SSH a las isntancias de AWS
-def AWS_ROOT_KEY=					#Credencial asociada a la creacion de instancia en AWS
+def AWS_ROOT_KEY= "KEY"					#Credencial asociada a la creacion de instancia en AWS
 def ANSIBLE_INV=ansible/aws_ec2.yml 			#Ruta del inventario de Ansible
 def ANSIBLE_PB=ansible/hello_2048.yml 			#Ruta del playbook de Ansible
 	
@@ -33,7 +33,7 @@ pipeline {
             steps{ 
 		withCredentials([string(credentialsId: '$TOKEN_GIT', variable: 'GIT_TOKEN')]) {
 		    sh 'echo $GIT_TOKEN | docker login ghcr.io -u $DOCKER_USER --password-stdin'
-                    sh 'docker push $REPO:1.0.${BUILD_NUMBER}'
+                    sh 'docker push $GIT_IMG:1.0.${BUILD_NUMBER}'
 		}
             }
         }   
