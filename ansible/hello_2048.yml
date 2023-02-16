@@ -5,6 +5,7 @@
   gather_facts: false
   vars:
     ansible_user: ec2-user
+    jenkins_user: ec2-user
 
   tasks:
     - name: Wait for SSH to come up
