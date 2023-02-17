@@ -3,17 +3,16 @@
 pipeline {
     agent any
  		
-	def GIT_REPO_PKG = 'ghcr.io/alvarodcr/hello-terraform'			// GHCR_PKG package repository
-	def GIT_REPO_SSH = 'git@github.com:alvarodcr/hello-terraform.git'	// GIT SSH repository
-	def GIT_SSH = "git-ssh"							// GIT SSH credentials
-	def GIT_USER = 'alvarodcr'						// GIT username
-	def GHCR_TOKEN = 'ghrc_token'						// ghcr.io credential (token) 
-	def GHCR_PKG = 'helloterraformpkg'					// PKG name that will be uploaded to ghcr.io
-	//def AWS_KEY_INS = 'ssh-amazon'					// AWS credentials for connecting via SSH
-	//def AWS_ROOT_KEY = '2934977b-3b53-4065-8b4a-312c2259a9f3'		// AWS credential associated with creating instances
-	//def ANSIBLE_INV = 'aws_ec2.yml' 					// Ansible inventory path
-	//def ANSIBLE_PB = 'hello_2048.yml' 					// Ansible playbook path
-
+    def GIT_REPO_PKG = 'ghcr.io/alvarodcr/hello-terraform'			// GHCR_PKG package repository
+    def GIT_REPO_SSH = 'git@github.com:alvarodcr/hello-terraform.git'	// GIT SSH repository
+    def GIT_SSH = 'git-ssh'							// GIT SSH credentials
+    def GIT_USER = 'alvarodcr'						// GIT username
+    def GHCR_TOKEN = 'ghrc_token'						// ghcr.io credential (token) 
+    def GHCR_PKG = 'helloterraformpkg'					// PKG name that will be uploaded to ghcr.io
+    //def AWS_KEY_INS = 'ssh-amazon'					// AWS credentials for connecting via SSH
+    //def AWS_ROOT_KEY = '2934977b-3b53-4065-8b4a-312c2259a9f3'		// AWS credential associated with creating instances
+    //def ANSIBLE_INV = 'aws_ec2.yml' 					// Ansible inventory path
+    //def ANSIBLE_PB = 'hello_2048.yml' 					// Ansible playbook path
     
     options {
         timestamps()
