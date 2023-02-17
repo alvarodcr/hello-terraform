@@ -53,7 +53,7 @@
         directory_mode: 0755
      
     - name: Copy docker-compose.yml to ~/app on AWS EC2
-      command: cd home/ec2-user/app
+      command: cd /home/ec2-user/app
 
     - name: Pull hello-2048 container
       command: docker-compose pull 
