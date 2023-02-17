@@ -40,7 +40,8 @@
     - name: Install Docker Compose
       pip:
         name: docker-compose
-
+        executable: /usr/bin/pip
+        
     - name: Create directory ~/app
       file:
         path: /home/ec2-user/app
