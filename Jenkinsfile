@@ -13,6 +13,11 @@ def GHCR_PKG = 'helloterraformpkg'					// PKG name that will be uploaded to ghcr
 
 pipeline {
     agent any
+    enviroment{
+	    
+	    
+	    
+    }
     
     options {
         timestamps()
@@ -26,8 +31,9 @@ pipeline {
 		sh '''
 		docker-compose build
                 git tag 1.0.${BUILD_NUMBER}
-                docker tag ${GIT_REPO_PKG}/${GHCR_PKG}:latest ${GIT_REPO_PKG}/${GHCR_PKG}:1.0.${BUILD_NUMBER}
                 '''
+		sh ('docker tag'GIT_REPO_PKG'/'GHCR_PKG':latest 'GIT_REPO_PKG'/'GHCR_PKG':1.0.${BUILD_NUMBER}')
+                
 		sshagent([GIT_SSH]) {
 		sh 'git push --tags'
 		}
