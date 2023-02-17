@@ -11,10 +11,10 @@ pipeline {
 	GIT_USER = 'alvarodcr'						// GIT username
 	GHCR_TOKEN = 'ghrc_token'					// ghcr.io credential (token) 
 	GHCR_PKG = 'helloterraformpkg'					// PKG name that will be uploaded to ghcr.io
-	AWS_KEY_INS = 'ssh-amazon'						// AWS credentials for connecting via SSH
+	AWS_KEY_INS = 'ssh-amazon'					// AWS credentials for connecting via SSH
 	AWS_ROOT_KEY = '2934977b-3b53-4065-8b4a-312c2259a9f3'		// AWS credential associated with creating instances
-	ANSIBLE_INV = 'aws_ec2.yml' 				// Ansible inventory path
-	ANSIBLE_PB = 'hello_2048.yml' 				// Ansible playbook path
+	ANSIBLE_INV = 'aws_ec2.yml' 					// Ansible inventory path
+	ANSIBLE_PB = 'hello_2048.yml' 					// Ansible playbook path
     }
   
     options {
