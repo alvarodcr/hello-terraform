@@ -53,7 +53,7 @@ pipeline {
          
         stage('TERRAFORM --> BUILDING AWS EC2 INSTANCE') {
             steps {
-		withAWS(credentials: "${AWS_KEY_SSH}") {
+		withAWS(credentials: [AWS_KEY_SSH]) {
                     sh 'terraform apply -auto-approve -lock=false'                         
                 }
             }
