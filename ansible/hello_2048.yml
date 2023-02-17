@@ -19,7 +19,7 @@
   become: true
   
   vars:
-    ansible_user: ec2-user0
+    ansible_user: ec2-user
   
   tasks:
   
