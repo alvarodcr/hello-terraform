@@ -20,7 +20,7 @@ pipeline {
 	
     stages {
         
-	stage('DOCKER --> BUILDING IMAGE & TAG') {
+	stage('DOCKER --> BUILDING & TAGGING IMAGE') {
             steps{
 		sh '''
 		docker-compose build
@@ -53,13 +53,13 @@ pipeline {
          
         stage('TERRAFORM --> BUILDING AWS EC2 INSTANCE') {
             steps {
-		withAWS(credentials: [AWS_KEY_ROOT]) {
+		withAWS(credentials:AWS_KEY_ROOT) {
                     sh 'terraform apply -auto-approve -lock=false'                         
                 }
             }
         }
 	    
-	stage('ANSIBLE --> SETTING AWS EC2 INSTANCE --> DEPLOYING ${GHCR_PKG} CONTAINER') {
+	    stage("ANSIBLE --> SETTING AWS EC2 INSTANCE --> DEPLOYING CONTAINER ${GHCR_PKG}") {
             steps {
 		withAWS(credentials:AWS_KEY_ROOT) {
 		    ansiblePlaybook colorized: true, credentialsId:AWS_KEY_SSH, inventory:ANSIBLE_INV, playbook:ANSIBLE_PB                            
