@@ -33,7 +33,7 @@
         append: yes
     
     - name: Install Docker Compose
-      ansible.builtin.pip:: 
+      ansible.builtin.pip:
           name: docker-compose
           executable: pip
 
