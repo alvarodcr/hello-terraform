@@ -33,7 +33,8 @@
         append: yes
     
     - name: Install Docker Compose
-      command: pip install docker-compose
+      pip:
+        name: docker-compose 
 
     - name: Create directory ~/app
       file:
