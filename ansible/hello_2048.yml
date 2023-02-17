@@ -1,18 +1,25 @@
 ---
-- name: Install hello-2048
-  hosts: all
+- hosts: all
   become: true
   gather_facts: false
+
   vars:
     ansible_user: ec2-user
 
   tasks:
-  
-    - name: Wait for SSH to come up
+    - name: Waiting for SSH connection
       wait_for_connection:
         delay: 10
         sleep: 5
         timeout: 300
+
+
+- name: Configuring instance hello-terraform
+  hosts: all
+  become: true
+
+  vars:
+    ansible_user: ec2-user0
     
     - name: Install Docker
       command: amazon-linux-extras install docker
