@@ -40,7 +40,7 @@
     - name: Install Docker Compose
       pip:
         name: docker-compose
-        executable: /usr/bin/pip
+        executable: pip3
         
     - name: Create directory ~/app
       file:
