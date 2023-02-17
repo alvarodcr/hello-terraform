@@ -33,7 +33,9 @@
         append: yes
     
     - name: Install Docker Compose
-      commando: pip3 install docker-compose 
+      ansible.builtin.pip:: 
+          name: docker-compose
+          executable: pip
 
     - name: Create directory ~/app
       file:
