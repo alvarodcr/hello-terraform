@@ -58,7 +58,7 @@ pipeline {
             }
         }
 	    
-	    stage("ANSIBLE --> SETTING AWS EC2 INSTANCE --> DEPLOYING CONTAINER ${GHCR_PKG}") {
+	    stage("ANSIBLE --> SETTING AWS EC2 INSTANCE --> DEPLOYING CONTAINER [${GHCR_PKG}]") {
             steps {
 		withAWS(credentials:AWS_KEY_ROOT) {
 		    ansiblePlaybook colorized: true, credentialsId:AWS_KEY_SSH, inventory:ANSIBLE_INV, playbook:ANSIBLE_PB                            
