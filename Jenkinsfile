@@ -1,4 +1,4 @@
-//GITHUB --> DOCKER --> TERRAFORM --> ANSIBLE --> AWS
+//JENKINSFILE								//GITHUB --> DOCKER --> TERRAFORM --> ANSIBLE --> AWS
 
 def GIT_REPO_PKG = 'ghcr.io/alvarodcr/hello-terraform/helloterraformpkg'// GHCR_PKG package repository
 def GIT_REPO_SSH = 'git@github.com:alvarodcr/hello-terraform.git'	// GIT SSH repository
