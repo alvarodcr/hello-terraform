@@ -11,6 +11,7 @@ def ANSIBLE_INV = 'ansible/aws_ec2.yml' 				// Ansible inventory path
 def ANSIBLE_PB = 'ansible/hello_2048.yml' 				// Ansible playbook path
 
 pipeline {
+	
     agent any 
     options {
         timestamps()
