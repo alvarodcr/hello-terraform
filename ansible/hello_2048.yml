@@ -15,10 +15,8 @@
         timeout: 300
     
     - name: Install Docker
-      amazon_linux_extras:
-        name: docker
-        state: present
-
+      command: amazon-linux-extras install docker
+ 
     - name: Add user to Docker Group
       user:
         name: ec2-user
