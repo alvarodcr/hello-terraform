@@ -53,9 +53,5 @@
         directory_mode: "0755"
 
     - name: Pull and Deploy hello-2048 container
-      docker_compose:
-        project_src: /home/ec2-user/app/docker-compose.yml
-        project_name: hello-2048
-        pull: yes
-        detached: yes
-        state: started
+      command: docker-compose pull && docker-compose up -d
+       
