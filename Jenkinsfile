@@ -41,9 +41,9 @@ pipeline {
             steps{ 
 		withCredentials([string(credentialsId: 'ghrc_token', variable: 'TOKEN_GIT')]) {
 		    sh '''
-		    echo $TOKEN_GIT | docker login ghcr.io -u ${GIT_USER} --password-stdin'
-		    docker push ${GIT_REPO_PKG}/${GHCR_PKG}:1.0.${BUILD_NUMBER}'
-		    docker push ${GIT_REPO_PKG}/${GHCR_PKG}:latest'
+		    echo $TOKEN_GIT | docker login ghcr.io -u ${GIT_USER} --password-stdin
+		    docker push ${GIT_REPO_PKG}/${GHCR_PKG}:1.0.${BUILD_NUMBER}
+		    docker push ${GIT_REPO_PKG}/${GHCR_PKG}:latest
 		    '''		
 		}
             }
