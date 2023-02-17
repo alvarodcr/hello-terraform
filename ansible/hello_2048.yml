@@ -17,6 +17,7 @@
 - name: Configuring instance hello-terraform
   hosts: all
   become: true
+  gather_facts: false
   
   vars:
     ansible_user: ec2-user
