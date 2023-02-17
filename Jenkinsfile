@@ -26,7 +26,7 @@ pipeline {
 		docker-compose build
                 git tag 1.0.${BUILD_NUMBER}
                 '''
-		sh "docker tag '${GIT_REPO_PKG}/${GHCR_PKG}:latest ${GIT_REPO_PKG}/${GHCR_PKG}:1.0.${BUILD_NUMBER}'"
+		sh "docker tag ${GIT_REPO_PKG}/${GHCR_PKG}:latest ${GIT_REPO_PKG}/${GHCR_PKG}:1.0.${BUILD_NUMBER}"
 		sshagent([GIT_SSH]) {
 		    sh 'git push --tags'
 		}
@@ -38,8 +38,8 @@ pipeline {
 		withCredentials([string(credentialsId: GHCR_TOKEN, variable: 'TOKEN_GIT')]) {
 		    sh """
 		    echo $TOKEN_GIT | docker login ghcr.io -u ${GIT_USER} --password-stdin
-		    docker push '${GIT_REPO_PKG}/${GHCR_PKG}:1.0.${BUILD_NUMBER}'
-		    docker push '${GIT_REPO_PKG}/${GHCR_PKG}:latest'
+		    docker push ${GIT_REPO_PKG}/${GHCR_PKG}:1.0.${BUILD_NUMBER}
+		    docker push ${GIT_REPO_PKG}/${GHCR_PKG}:latest
 		    """	
 		}
             }
