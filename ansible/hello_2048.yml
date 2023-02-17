@@ -17,7 +17,6 @@
 - name: Configuring instance hello-terraform
   hosts: all
   become: true
-  gather_facts: false
   
   vars:
     ansible_user: ec2-user
@@ -25,7 +24,7 @@
   tasks:
   
     - name: Install Docker
-      command: amazon-linux-extras install docker
+      command: amazon-linux-extras install docker -y
  
     - name: Add user to Docker Group
       user:
