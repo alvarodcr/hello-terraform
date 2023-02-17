@@ -63,11 +63,10 @@ pipeline {
 	stage('ANSIBLE --> SETTING AWS EC2 INSTANCE --> DEPLOYING GHCR_PKG CONTAINER') {
             steps {
 		withAWS(credentials: '2934977b-3b53-4065-8b4a-312c2259a9f3') {
-		    withCredentials([sshUserPrivateKey(credentialsId:'ssh-amazon')]){
-			ansiblePlaybook credentialsId: 'ssh-amazon', inventory: 'ansible/aws_ec2.yml', playbook: 'ansible/hello_2048.yml'                         
-		   }
+		    ansiblePlaybook credentialsId: 'ssh-amazon', inventory: 'ansible/aws_ec2.yml', playbook: 'ansible/hello_2048.yml'                            
 		}
             }
         }
+    
     }     
 }
