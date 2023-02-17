@@ -49,8 +49,8 @@
         dest: /home/ec2-user/app
         owner: root
         group: root
-        mode: "0644"
-        directory_mode: "0755"
+        mode: 0644
+        directory_mode: 0755
      
     - name: Copy docker-compose.yml to ~/app on AWS EC2
       command: cd home/ec2-user/app
