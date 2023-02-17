@@ -6,10 +6,10 @@ def GIT_SSH = 'git-ssh'							// GIT SSH credentials
 def GIT_USER = 'alvarodcr'						// GIT username
 def GHCR_TOKEN = 'ghrc_token'						// ghcr.io credential (token) 
 def GHCR_PKG = 'helloterraformpkg'					// PKG name that will be uploaded to ghcr.io
-def AWS_KEY = 'ssh-amazon'					// AWS credentials for connecting via SSH
-//def AWS_ROOT_KEY = '2934977b-3b53-4065-8b4a-312c2259a9f3'		// AWS credential associated with creating instances
-//def ANSIBLE_INV = 'aws_ec2.yml' 					// Ansible inventory path
-//def ANSIBLE_PB = 'hello_2048.yml' 					// Ansible playbook path
+def AWS_KEY_SSH = 'ssh-amazon'						// AWS credentials for connecting via SSH
+def AWS_ROOT_KEY = '2934977b-3b53-4065-8b4a-312c2259a9f3'		// AWS credential associated with creating instances
+def ANSIBLE_INV = 'aws_ec2.yml' 					// Ansible inventory path
+def ANSIBLE_PB = 'hello_2048.yml' 					// Ansible playbook path
 
 pipeline {
     agent any 
@@ -20,7 +20,7 @@ pipeline {
 	
     stages {
         
-	stage('DOCKER --> BUILDING IMAGE') {
+	stage('DOCKER --> BUILDING IMAGE & TAG') {
             steps{
 		sh '''
 		docker-compose build
@@ -53,7 +53,7 @@ pipeline {
          
         stage('TERRAFORM --> BUILDING AWS EC2 INSTANCE') {
             steps {
-		withAWS(credentials: AWS_KEY) {
+		withAWS(credentials:AWS_KEY_SSH) {
                     sh 'terraform apply -auto-approve -lock=false'                         
                 }
             }
@@ -61,8 +61,8 @@ pipeline {
 	    
 	stage('ANSIBLE --> SETTING AWS EC2 INSTANCE --> DEPLOYING ${GHCR_PKG} CONTAINER') {
             steps {
-		withAWS(credentials: '2934977b-3b53-4065-8b4a-312c2259a9f3') {
-		    ansiblePlaybook colorized: true, credentialsId: 'ssh-amazon', inventory: 'ansible/aws_ec2.yml', playbook: 'ansible/hello_2048.yml'                            
+		withAWS(credentials:AWS_ROOT_KEY) {
+		    ansiblePlaybook colorized: true, credentialsId:AWS_KEY_SSH, inventory:ANSIBLE_INV, playbook:ANSIBLE_PB                            
 		}
             }
         }
