@@ -8,8 +8,8 @@ def GHCR_TOKEN = 'ghrc_token'						// ghcr.io credential (token)
 def GHCR_PKG = 'helloterraformpkg'					// PKG name that will be uploaded to ghcr.io
 def AWS_KEY_SSH = 'ssh-amazon'						// AWS credentials for connecting via SSH
 def AWS_ROOT_KEY = '2934977b-3b53-4065-8b4a-312c2259a9f3'		// AWS credential associated with creating instances
-def ANSIBLE_INV = 'aws_ec2.yml' 					// Ansible inventory path
-def ANSIBLE_PB = 'hello_2048.yml' 					// Ansible playbook path
+def ANSIBLE_INV = 'ansible/aws_ec2.yml' 				// Ansible inventory path
+def ANSIBLE_PB = 'ansible/hello_2048.yml' 				// Ansible playbook path
 
 pipeline {
     agent any 
@@ -53,7 +53,7 @@ pipeline {
          
         stage('TERRAFORM --> BUILDING AWS EC2 INSTANCE') {
             steps {
-		withAWS(credentials:AWS_KEY_SSH) {
+		withAWS(credentials: "${AWS_KEY_SSH}") {
                     sh 'terraform apply -auto-approve -lock=false'                         
                 }
             }
