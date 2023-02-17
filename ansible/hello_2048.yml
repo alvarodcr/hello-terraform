@@ -20,7 +20,9 @@
 
   vars:
     ansible_user: ec2-user0
-    
+  
+  tasks:
+  
     - name: Install Docker
       command: amazon-linux-extras install docker
  
