@@ -56,7 +56,7 @@
       command: cd /home/ec2-user/app
 
     - name: Pull hello-2048 container
-      command: docker-compose pull 
+      command: docker pull ghcr.io/alvarodcr/hello-terraform/helloterraformpkg:latest
       
     - name: Deploy hello-2048 container
       command: docker-compose up -d
