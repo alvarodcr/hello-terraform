@@ -39,7 +39,7 @@ pipeline {
         
         stage('DOCKER --> LOGIN & PUSHING TO GHCR.IO') {
             steps{ 
-		withCredentials([string(credentialsId: 'ghrc_token', variable: 'TOKEN_GIT')]) {
+		withCredentials([string(credentialsId: 'GHCR_TOKEN', variable: 'TOKEN_GIT')]) {
 		    sh 'echo $TOKEN_GIT | docker login ghcr.io -u ${GIT_USER} --password-stdin'
 		    sh 'docker push ${GIT_REPO_PKG}/${GHCR_PKG}:1.0.${BUILD_NUMBER}'
 		}
@@ -60,7 +60,7 @@ pipeline {
             }
         }
 	    
-	stage('ANSIBLE --> SETTING AWS EC2 INSTANCE --> DEPLOYING <${GHCR_PKG}> CONTAINER') {
+	stage('ANSIBLE --> SETTING AWS EC2 INSTANCE --> DEPLOYING GHCR_PKG CONTAINER') {
             steps {
 		withAWS(credentials: '2934977b-3b53-4065-8b4a-312c2259a9f3') {
 		    ansiblePlaybook credentialsId: 'ssh-amazon', inventory: 'ansible/aws_ec2.yml', playbook: 'ansible/hello_2048.yml'                         
