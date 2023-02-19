@@ -26,7 +26,7 @@ pipeline {
                 git tag 1.0.${BUILD_NUMBER}
                 """
                 sh "docker tag ${DOCKER_REPO_URL}:latest ${DOCKER_REPO_URL}:1.0.${BUILD_NUMBER}"
-                withCredentials([GIT_SSH_CREDENTIALS]) {
+                sshagent([GIT_SSH_CREDENTIALS]) {
                     sh 'git push --tags'
                 }
             }                              
