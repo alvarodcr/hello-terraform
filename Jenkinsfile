@@ -9,7 +9,7 @@ pipeline {
 
     environment {
         DOCKER_REPO_URL = 'ghcr.io/alvarodcr/hello-terraform/helloterraformpkg' // Docker repository URL
-        GIT_SSH_CREDENTIALS = credentials('git-ssh') 				            // SSH credentials for Git
+        GIT_SSH_CREDENTIALS = credentialsId('git-ssh') 				            // SSH credentials for Git
         //GIT_USERNAME = 'alvarodcr' 						                    // Git username
         GHCR_TOKEN_CREDENTIALS = credentials('ghrc_token') 			            // ghcr.io credentials (token)
         AWS_SSH_CREDENTIALS = credentials('ssh-amazon') 			            // SSH credentials for connecting to AWS
