@@ -9,13 +9,13 @@ pipeline {
 
     environment {
         DOCKER_REPO_URL = 'ghcr.io/alvarodcr/hello-terraform/helloterraformpkg' // Docker repository URL
-        GIT_SSH_CREDENTIALS = credentials('git-ssh') 				// SSH credentials for Git
-        //GIT_USERNAME = 'alvarodcr' 						// Git username
-        GHCR_TOKEN_CREDENTIALS = credentials('ghrc_token') 			// ghcr.io credentials (token)
-        AWS_SSH_CREDENTIALS = credentials('ssh-amazon') 			// SSH credentials for connecting to AWS
-        AWS_CREDENTIALS = credentials('aws-creds')				// AWS credentials for creating instances AWS
-        ANSIBLE_INVENTORY_PATH = 'ansible/aws_ec2.yml'				// Ansible inventory path
-        ANSIBLE_PLAYBOOK_PATH = 'ansible/hello_2048.yml' 			// Ansible playbook path
+        GIT_SSH_CREDENTIALS = credentials('git-ssh') 				            // SSH credentials for Git
+        //GIT_USERNAME = 'alvarodcr' 						                    // Git username
+        GHCR_TOKEN_CREDENTIALS = credentials('ghrc_token') 			            // ghcr.io credentials (token)
+        AWS_SSH_CREDENTIALS = credentials('ssh-amazon') 			            // SSH credentials for connecting to AWS
+        AWS_CREDENTIALS = credentials('2934977b-3b53-4065-8b4a-312c2259a9f3')	// AWS credentials for creating instances AWS
+        ANSIBLE_INVENTORY_PATH = 'ansible/aws_ec2.yml'				            // Ansible inventory path
+        ANSIBLE_PLAYBOOK_PATH = 'ansible/hello_2048.yml' 			            // Ansible playbook path
     }
 
     stages {
