@@ -18,7 +18,7 @@ resource "aws_instance" "app_server" {
   instance_type          = "t2.micro"
   key_name               = "clave-lucatic"
   vpc_security_group_ids = ["sg-013c0f1d5466fd440"]
-  instance_count = 2
+  count = 2
   tags = {
     Name = "hello-terraform"
     APP  = var.instance_app
