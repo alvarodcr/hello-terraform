@@ -9,6 +9,7 @@ def AWS_KEY_SSH = 'ssh-amazon'						// AWS credentials for connecting via SSH
 def AWS_KEY_ROOT = '2934977b-3b53-4065-8b4a-312c2259a9f3'		// AWS credentials for creating instances
 def ANSIBLE_INV = 'ansible/aws_ec2.yml' 				// Ansible inventory path
 def ANSIBLE_PB = 'ansible/hello_2048.yml' 				// Ansible playbook path
+def VERSION = '2.0'							// TAG version
 
 pipeline {
 	
@@ -22,11 +23,11 @@ pipeline {
         
 	stage('DOCKER --> BUILDING & TAGGING IMAGE') {
             steps{
-		sh '''
+		sh """
 		docker-compose build
-                git tag 2.0.${BUILD_NUMBER}
-                '''
-		sh "docker tag ${GIT_REPO_PKG}:latest ${GIT_REPO_PKG}:1.0.${BUILD_NUMBER}"
+                git tag ${VERSION}.${BUILD_NUMBER}
+                docker tag ${GIT_REPO_PKG}:latest ${GIT_REPO_PKG}:${VERSION}.${BUILD_NUMBER}
+		"""
 		sshagent([GIT_SSH]) {
 		    sh 'git push --tags'
 		}
@@ -38,7 +39,7 @@ pipeline {
 		withCredentials([string(credentialsId: GHCR_TOKEN, variable: 'TOKEN_GIT')]) {
 		    sh """
 		    echo $TOKEN_GIT | docker login ghcr.io -u ${GIT_USER} --password-stdin
-		    docker push ${GIT_REPO_PKG}:2.0.${BUILD_NUMBER}
+		    docker push ${GIT_REPO_PKG}:${VERSION}.${BUILD_NUMBER}
 		    """	
 		}
             }
