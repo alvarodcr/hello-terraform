@@ -59,9 +59,9 @@
         mode: 0644
         directory_mode: 0755
      
-    - name: Pull hello-2048 container
-      command: cd /home/ec2-user/app && docker-compose pull
-      
-    - name: Deploy hello-2048 container
-      command: cd /home/ec2-user/app && docker-compose up -d
-       
+    - name: Pull and run images
+      community.docker.docker_compose:
+        project_src: /home/ec2-user/app
+        pull: true
+      vars:
+          ansible_python_interpreter: /usr/bin/python3
