@@ -60,7 +60,7 @@
         directory_mode: 0755
      
     - name: Pull hello-2048 container
-      command: cd /home/ec2-user/app && docker pull ghcr.io/alvarodcr/hello-terraform/helloterraformpkg:latest
+      command: cd /home/ec2-user/app && docker-compose pull
       
     - name: Deploy hello-2048 container
       command: cd /home/ec2-user/app && docker-compose up -d
