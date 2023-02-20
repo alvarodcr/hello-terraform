@@ -14,13 +14,13 @@ provider "aws" {
 }
 
 resource "aws_instance" "app_server" {
+  count                  = 2
   ami                    = "ami-0b752bf1df193a6c4"
   instance_type          = "t2.micro"
   key_name               = "clave-lucatic"
   vpc_security_group_ids = ["sg-013c0f1d5466fd440"]
-  count = 2
   tags = {
-    Name = "hello-terraform"
+    Name = "hello-terraform-$(count.index+1)"
     APP  = var.instance_app
   }
 }
