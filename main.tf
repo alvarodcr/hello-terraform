@@ -20,7 +20,7 @@ resource "aws_instance" "app_server" {
   key_name               = "clave-lucatic"
   vpc_security_group_ids = ["sg-013c0f1d5466fd440"]
   tags = {
-    Name = "hello-terraform-$(count.index+1)"
+    Name = "hello-terraform"
     APP  = var.instance_app
   }
 }
