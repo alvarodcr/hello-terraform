@@ -4,5 +4,5 @@ services:
     build: .
     image: ghcr.io/alvarodcr/hello-terraform/helloterraformpkg:latest
     ports:
-      - "80:80"
+      - "80:8080"
 
